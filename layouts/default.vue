@@ -42,7 +42,7 @@
       </v-btn>
     </v-app-bar> -->
     <v-main>
-      <Parallax />
+      <!-- <Parallax /> -->
       <v-container>
         <Nuxt />
       </v-container>
@@ -64,11 +64,11 @@
 </template>
 
 <script>
-import Parallax from '~/components/explorer_page/ParallaxHome.vue'
+// import Parallax from '~/components/explorer_page/ParallaxHome.vue'
 export default {
-  name: 'DefaultLayout',
+  // name: 'DefaultLayout',
   components: {
-    Parallax
+    // Parallax,
   },
   data() {
     return {

@@ -1,11 +1,7 @@
 <template>
   <div>
     <v-col>
-      <v-card
-        max-width="600"
-        flat
-        class="mx-auto text-center transparent top"
-      >
+      <v-card max-width="600" flat class="mx-auto text-center transparent top">
         <v-col>
           <h2 class="bien">Bienvenidos a Webicultores</h2>
           <span>
@@ -29,7 +25,11 @@
       </h2>
       <v-row>
         <v-col sm="6">
-          <v-img class="mx-auto" max-width="200" src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040947/webicultores/de2_tdtlfw.png"></v-img>
+          <v-img
+            class="mx-auto"
+            max-width="200"
+            src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040947/webicultores/de2_tdtlfw.png"
+          ></v-img>
         </v-col>
         <v-col sm="6" cols>
           <v-card>
@@ -66,7 +66,11 @@
           </v-card>
         </v-col>
         <v-col sm="6">
-          <v-img max-width="400" class="mx-auto" src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040941/webicultores/order_pfcxs2.png"></v-img>
+          <v-img
+            max-width="400"
+            class="mx-auto"
+            src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040941/webicultores/order_pfcxs2.png"
+          ></v-img>
         </v-col>
       </v-row>
     </v-col>
@@ -75,7 +79,11 @@
       <h2 class="mb-12 top text-center">Menú y gestión de pedidos</h2>
       <v-row>
         <v-col sm="6">
-          <v-img max-width="250" class="mx-auto" src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040940/webicultores/de3_gs8wxy.png"></v-img>
+          <v-img
+            max-width="250"
+            class="mx-auto"
+            src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040940/webicultores/de3_gs8wxy.png"
+          ></v-img>
         </v-col>
         <v-col sm="6" cols>
           <v-card>
@@ -101,7 +109,11 @@
           Crea una página web totalmente única y personalizada ajustada a tu
           marca, sorprende a tus clientes con nuevas herramientas
         </v-card-subtitle>
-        <v-img height="200" width="100%" src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040942/webicultores/ban_zejeog.png">
+        <v-img
+          height="200"
+          width="100%"
+          src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040942/webicultores/ban_zejeog.png"
+        >
           <v-row justify="center">
             <v-col>
               <v-btn outlined color="#00B0FF" x-large class="mt-12"
@@ -120,7 +132,11 @@
 
     <v-row class="top">
       <v-col sm="5" cols>
-        <v-img max-width="200" class="mx-auto mb-8" src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040940/webicultores/de_srvrzy.png"></v-img>
+        <v-img
+          max-width="200"
+          class="mx-auto mb-8"
+          src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040940/webicultores/de_srvrzy.png"
+        ></v-img>
         <v-card outlined color="#01579B">
           <v-card-text>
             En Webicucultores nos esforzamos por brindar una experiencia fluida,

@@ -1,9 +1,17 @@
 <template>
   <div>
     <v-row justify="center">
-      <v-img class="ornament d-none d-lg-flex d-xl-none" src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692057331/webicultores/banner_sowbqu-transformed_1_aute43.png"> </v-img>
+      <v-img
+        class="ornament d-none d-lg-flex d-xl-none"
+        src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692057331/webicultores/banner_sowbqu-transformed_1_aute43.png"
+      >
+      </v-img>
       <v-col class="logo">
-        <v-img class="mx-auto" max-width="600" src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040944/webicultores/log_s_dy28na.png"></v-img>
+        <v-img
+          class="mx-auto"
+          max-width="600"
+          src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040944/webicultores/log_s_dy28na.png"
+        ></v-img>
       </v-col>
       <v-col class="text text-center">
         <h1>Aplicaciones para negocios con servicio de entrega delivery</h1>
@@ -11,7 +19,11 @@
         <!-- <v-btn class="mt-4" color="blue">Crear tienda</v-btn> -->
       </v-col>
     </v-row>
-    <v-parallax height="460" src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040950/webicultores/bg1_x2rolh.png"> </v-parallax>
+    <v-parallax
+      height="460"
+      src="https://res.cloudinary.com/dku13l2ep/image/upload/v1692040950/webicultores/bg1_x2rolh.png"
+    >
+    </v-parallax>
   </div>
 </template>
 
