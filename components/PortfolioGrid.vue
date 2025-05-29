@@ -99,9 +99,9 @@
       </p>
       <v-btn
         color="primary"
-        @click="resetFilters"
         class="mt-4"
         prepend-icon="mdi-refresh"
+        @click="resetFilters"
       >
         Reiniciar filtros
       </v-btn>

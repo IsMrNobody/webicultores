@@ -5,12 +5,12 @@
       :elevation="isHovering ? 8 : 2"
       :class="['project-card', { 'gradient-border': isHovering }]"
       :style="cardBackgroundStyle"
-      @click="toggleExpand"
       rounded="lg"
       class="mb-6"
+      @click="toggleExpand"
     >
       <v-card-item class="card-content">
-        <template v-slot:prepend>
+        <template #prepend>
           <v-avatar rounded="lg" size="100" class="mr-3 project-avatar">
             <v-img
               :src="project.image"
@@ -26,7 +26,7 @@
           project.name
         }}</v-card-title>
 
-        <template v-slot:append>
+        <template #append>
           <v-icon
             size="large"
             :color="isExpanded ? 'primary' : 'grey'"
@@ -63,7 +63,7 @@
               </div> -->
 
               <v-row class="mt-4">
-                <v-col cols="12" sm="auto" v-if="project.websiteUrl">
+                <v-col v-if="project.websiteUrl" cols="12" sm="auto">
                   <v-btn
                     color="primary"
                     block
