@@ -10,7 +10,12 @@
       <!-- Project image with overlay -->
       <div class="image-container">
         <v-img
-          :src="project.image || (project.images && project.images.length > 0 ? project.images[0] : project.backgroundImage)"
+          :src="
+            project.image ||
+            (project.images && project.images.length > 0
+              ? project.images[0]
+              : project.backgroundImage)
+          "
           :alt="project.name"
           height="100%"
           width="100%"
@@ -315,12 +320,8 @@ export default {
 .project-image {
   width: 100%;
   height: 100%;
-  transition: transform 0.5s ease;
-  object-fit: cover;
-}
-
-.project-image {
-  transform: scale(1.05);
+  object-fit: none;
+  background: #222;
 }
 
 .overlay {

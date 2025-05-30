@@ -18,8 +18,13 @@ export default {
         {
           name: 'Orion Gallery',
           images: [
-            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748529859/Construtech/banners/3_bwkjur.png',
-            'https://res.cloudinary.com/dku13l2ep/image/upload/v1725375530/Construtech/banners/pexels-pixabay-73833_lrbbxc.jpg',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748622572/orion/logorion_2_wj8rol.png5',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748622607/orion/00134-absolutereality_v181_4214998850_jrzjnr.png',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748529741/orion/Wallpaper-orion_dqmo3v.png',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748622811/orion/portada_jlwj1n.png',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748622963/orion/Capa_3_vlztxv.png',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748622963/orion/Capa_2_arcmeb.png',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748623028/orion/inst_sn4bxp.png',
           ],
           image:
             'https://res.cloudinary.com/dku13l2ep/image/upload/v1748529741/orion/Wallpaper-orion_dqmo3v.png',
@@ -39,8 +44,9 @@ export default {
         {
           name: 'InDios Therapy',
           images: [
-            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748530085/JARTATE/Ciudad/maracay/milacafe/mila_04_wogl10.png',
-            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748530085/JARTATE/Ciudad/maracay/milacafe/mila_04_wogl10.png',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748639367/JARTATE/Ciudad/lecheria/indios/Proyecto_nuevo_1_hnii9t.png',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748639366/JARTATE/Ciudad/lecheria/indios/frnn_m6a6gf.png',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748639366/JARTATE/Ciudad/lecheria/indios/inlog_maddcz.png',
           ],
           image:
             'https://res.cloudinary.com/dku13l2ep/image/upload/v1748529741/orion/Wallpaper-orion_dqmo3v.png',

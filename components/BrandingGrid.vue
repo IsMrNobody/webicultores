@@ -37,7 +37,10 @@
             <v-chip
               class="ma-2"
               :color="active ? 'primary' : 'grey darken-2'"
-              @click="filterByCategory(category); toggle()"
+              @click="
+                filterByCategory(category)
+                toggle()
+              "
             >
               {{ category }}
             </v-chip>
