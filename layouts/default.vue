@@ -1,7 +1,7 @@
 <template>
   <v-app dark>
     <!-- App Bar -->
-    <v-app-bar app color="dark" dark elevate-on-scout>
+    <!-- <v-app-bar app color="dark" dark elevate-on-scout>
       <v-app-bar-nav-icon
         class="hidden-md-and-up"
         @click.stop="drawer = !drawer"
@@ -20,7 +20,6 @@
 
       <v-spacer></v-spacer>
 
-      <!-- Desktop Navigation -->
       <div class="d-none d-md-flex">
         <v-btn
           v-for="(item, i) in navItems"
@@ -35,11 +34,10 @@
         </v-btn>
       </div>
 
-      <!-- Mobile Menu Button -->
       <v-btn icon class="d-md-none" @click.stop="drawer = !drawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
-    </v-app-bar>
+    </v-app-bar> -->
 
     <!-- Mobile Navigation Drawer -->
     <v-navigation-drawer v-model="drawer" app temporary right class="d-md-none">
@@ -69,9 +67,43 @@
     <!-- Footer -->
     <v-footer color="grey darken-4" dark padless>
       <v-container>
-        <v-row justify="center" no-gutters>
-          <v-col cols="12" class="text-center py-4">
-            <div class="mb-2">
+        <v-row class="py-6">
+          <!-- Navigation Headers -->
+          <v-col cols="12" class="text-center">
+            <div class="d-flex flex-wrap justify-center">
+              <v-btn
+                to="/portfolio"
+                text
+                class="mx-4 my-2 gradient-hover-btn"
+                active-class="gradient-active"
+              >
+                <span class="text-h6 font-weight-bold">Web</span>
+              </v-btn>
+              <v-btn
+                to="/branding"
+                text
+                class="mx-4 my-2 gradient-hover-btn"
+                active-class="gradient-active"
+              >
+                <span class="text-h6 font-weight-bold">Diseño</span>
+              </v-btn>
+              <v-btn
+                to="/portfolio?category=animation"
+                text
+                class="mx-4 my-2 gradient-hover-btn"
+                active-class="gradient-active"
+              >
+                <span class="text-h6 font-weight-bold">Video</span>
+              </v-btn>
+            </div>
+          </v-col>
+        </v-row>
+
+        <!-- Social Icons and Copyright -->
+        <v-divider dark class="my-2"></v-divider>
+        <v-row justify="center" no-gutters class="py-4">
+          <v-col cols="12" class="text-center">
+            <div class="mb-3">
               <v-btn
                 v-for="(icon, i) in socialIcons"
                 :key="i"
@@ -102,6 +134,7 @@ export default {
     return {
       drawer: false,
       group: null,
+      // Header Navigation
       navItems: [
         {
           icon: 'mdi-code-tags',
@@ -119,6 +152,7 @@ export default {
           to: '/contact',
         },
       ],
+      // Social Media Icons
       socialIcons: [
         {
           name: 'mdi-facebook',
@@ -148,6 +182,48 @@ export default {
 </script>
 
 <style scoped>
+.gradient-hover-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  padding: 8px 16px;
+}
+
+.gradient-hover-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  background: transparent;
+  border-radius: 4px;
+  background: linear-gradient(45deg, #2196f3, #e91e63) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gradient-hover-btn:hover::before {
+  opacity: 1;
+}
+
+.gradient-hover-btn.gradient-active {
+  background: linear-gradient(45deg, #2196f3, #e91e63);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: grey;
+  background-clip: text;
+  font-weight: bold;
+}
+
+.gradient-hover-btn.gradient-active::before {
+  opacity: 1;
+}
+
 .v-toolbar__title {
   overflow: visible;
 }

@@ -20,18 +20,44 @@
 
     <!-- Filter and search -->
     <v-row class="mb-6">
-      <v-col cols="12" md="8" class="d-flex align-center">
-        <v-chip
-          v-for="category in categories"
-          :key="category"
-          class="mr-2 mb-2"
-          :color="selectedCategory === category ? 'primary' : 'grey darken-2'"
-          @click="filterByCategory(category)"
+      <v-col cols="12" md="8">
+        <!-- Mobile slider for categories -->
+        <v-slide-group
+          v-model="selectedCategory"
+          show-arrows
+          class="d-md-none mb-4"
+          active-class="primary"
         >
-          {{ category }}
-        </v-chip>
+          <v-slide-item
+            v-for="category in categories"
+            :key="category"
+            v-slot="{ active, toggle }"
+            :value="category"
+          >
+            <v-chip
+              class="ma-2"
+              :color="active ? 'primary' : 'grey darken-2'"
+              @click="filterByCategory(category); toggle()"
+            >
+              {{ category }}
+            </v-chip>
+          </v-slide-item>
+        </v-slide-group>
+
+        <!-- Desktop grid for categories -->
+        <div class="d-none d-md-flex flex-wrap">
+          <v-chip
+            v-for="category in categories"
+            :key="category"
+            class="mr-2 mb-2"
+            :color="selectedCategory === category ? 'primary' : 'grey darken-2'"
+            @click="filterByCategory(category)"
+          >
+            {{ category }}
+          </v-chip>
+        </div>
       </v-col>
-      <v-col cols="12" md="4">
+      <!-- <v-col cols="12" md="4">
         <v-text-field
           v-model="search"
           label="Buscar proyectos"
@@ -41,7 +67,7 @@
           hide-details
           clearable
         ></v-text-field>
-      </v-col>
+      </v-col> -->
     </v-row>
 
     <!-- Projects grid -->
