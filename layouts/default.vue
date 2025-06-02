@@ -88,7 +88,7 @@
                 <span class="text-h6 font-weight-bold">Diseño</span>
               </v-btn>
               <v-btn
-                to="/portfolio?category=animation"
+                to="/video"
                 text
                 class="mx-4 my-2 gradient-hover-btn"
                 active-class="gradient-active"

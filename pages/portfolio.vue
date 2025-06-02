@@ -16,7 +16,35 @@ export default {
     return {
       projects: [
         {
+          name: 'Orion Gallery',
+          image:
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748529741/orion/Wallpaper-orion_dqmo3v.png',
+          backgroundImage:
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748529741/orion/Wallpaper-orion_dqmo3v.png',
+          description:
+            'Galería de arte digital que presenta una colección exclusiva de obras contemporáneas. Interfaz minimalista que permite explorar y apreciar el arte en un entorno digital inmersivo.',
+          websiteUrl: 'https://orion-gallery.netlify.app/',
+          technologies: [
+            'Vue.js',
+            'Nuxt.js',
+            'Vuetify',
+            'Responsive Design',
+            'Art Gallery',
+          ],
+        },
+        {
+          name: 'Delivery App',
+          image:
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748530259/JARTATE/bann_uiilbf.png',
+          description:
+            'Sistema de reservas para restaurantes con gestión de disponibilidad en tiempo real.',
+          websiteUrl: 'https://jartate.online',
+          githubUrl: 'https://github.com/usuario/booking-app',
+          technologies: ['Vue.js', 'Socket.io', 'Express', 'MongoDB'],
+        },
+        {
           name: 'InDios Therapy',
+          logo: '/W.png',
           image:
             'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
           backgroundImage:
@@ -34,38 +62,21 @@ export default {
           ],
         },
         {
-          name: 'Arroz Frito Anaco',
+          name: 'Construtech UK',
           image:
-            'https://images.unsplash.com/photo-1604917014470-57915f0adf4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748552444/Construtech/banners/card85x55_front_zwrpri.png',
           backgroundImage:
-            'https://res.cloudinary.com/dku13l2ep/image/upload/v1698510728/JARTATE/Ciudad/Anaco/Arroz%20frito%20anaco/Logo/LogoAFA_mjfhzh.webp',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748529859/Construtech/banners/3_bwkjur.png',
           description:
-            'Sitio web para restaurante de comida asiática con servicio de delivery y pick-up. Muestra el menú, horarios y opciones de pedido en línea para una experiencia culinaria auténtica.',
-          websiteUrl: 'https://arrozfritoanaco.netlify.app/',
+            'Sitio web corporativo para empresa de construcción y remodelación especializada en fabricación de acero y carpintería personalizada. Diseño elegante que resalta la calidad de sus servicios para proyectos industriales, comerciales y residenciales en Reino Unido.',
+          websiteUrl: 'https://construtech.uk/',
           technologies: [
             'HTML5',
             'CSS3',
             'JavaScript',
-            'Node.js',
             'Responsive Design',
-            'Menu Online',
-          ],
-        },
-        {
-          name: 'Orion Gallery',
-          image:
-            'https://images.unsplash.com/photo-1531913764164-f85c52d6e654?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80',
-          backgroundImage:
-            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748529741/orion/Wallpaper-orion_dqmo3v.png',
-          description:
-            'Galería de arte digital que presenta una colección exclusiva de obras contemporáneas. Interfaz minimalista que permite explorar y apreciar el arte en un entorno digital inmersivo.',
-          websiteUrl: 'https://orion-gallery.netlify.app/',
-          technologies: [
-            'Vue.js',
-            'Nuxt.js',
-            'Vuetify',
-            'Responsive Design',
-            'Art Gallery',
+            'SEO',
+            'WhatsApp Integration',
           ],
         },
         {
@@ -85,28 +96,11 @@ export default {
             'Product Catalog',
           ],
         },
-        {
-          name: 'Construtech UK',
-          image:
-            'https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1331&q=80',
-          backgroundImage:
-            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748529859/Construtech/banners/3_bwkjur.png',
-          description:
-            'Sitio web corporativo para empresa de construcción y remodelación especializada en fabricación de acero y carpintería personalizada. Diseño elegante que resalta la calidad de sus servicios para proyectos industriales, comerciales y residenciales en Reino Unido.',
-          websiteUrl: 'https://construtech.uk/',
-          technologies: [
-            'HTML5',
-            'CSS3',
-            'JavaScript',
-            'Responsive Design',
-            'SEO',
-            'WhatsApp Integration',
-          ],
-        },
+
         {
           name: 'Mila Café',
           image:
-            'https://milacafe.site/wp-content/uploads/2023/12/logo-mila-cafe.png',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748645130/JARTATE/Ciudad/maracay/milacafe/recursos/mil2_vifelg.png',
           backgroundImage:
             'https://res.cloudinary.com/dku13l2ep/image/upload/v1748530085/JARTATE/Ciudad/maracay/milacafe/mila_04_wogl10.png',
           description:
@@ -122,9 +116,27 @@ export default {
           ],
         },
         {
+          name: 'Arroz Frito Anaco',
+          image:
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1698510728/JARTATE/Ciudad/Anaco/Arroz%20frito%20anaco/Logo/LogoAFA_mjfhzh.webp',
+          backgroundImage:
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1698510728/JARTATE/Ciudad/Anaco/Arroz%20frito%20anaco/Logo/LogoAFA_mjfhzh.webp',
+          description:
+            'Sitio web para restaurante de comida asiática con servicio de delivery y pick-up. Muestra el menú, horarios y opciones de pedido en línea para una experiencia culinaria auténtica.',
+          websiteUrl: 'https://arrozfritoanaco.netlify.app/',
+          technologies: [
+            'HTML5',
+            'CSS3',
+            'JavaScript',
+            'Node.js',
+            'Responsive Design',
+            'Menu Online',
+          ],
+        },
+        {
           name: 'Latam Turquesa',
           image:
-            'https://latamturquesa.com/wp-content/uploads/2023/12/logo-turquesa.png',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748705558/latamturquesa/lat1_vwlbwj.png',
           backgroundImage:
             'https://res.cloudinary.com/dku13l2ep/image/upload/v1748530206/latamturquesa/colorlatam_xbb88s.png',
           description:
@@ -175,16 +187,6 @@ export default {
         //   githubUrl: 'https://github.com/usuario/personal-blog',
         //   technologies: ['Vue.js', 'Nuxt.js', 'Markdown', 'Contentful'],
         // },
-        {
-          name: 'Aplicación de Reservas',
-          image:
-            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748530259/JARTATE/bann_uiilbf.png',
-          description:
-            'Sistema de reservas para restaurantes con gestión de disponibilidad en tiempo real.',
-          websiteUrl: 'https://jartate.online',
-          githubUrl: 'https://github.com/usuario/booking-app',
-          technologies: ['Vue.js', 'Socket.io', 'Express', 'MongoDB'],
-        },
       ],
     }
   },

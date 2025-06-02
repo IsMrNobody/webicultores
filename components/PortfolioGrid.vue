@@ -69,7 +69,7 @@
           v-for="(project, index) in filteredProjects"
           :key="index"
           cols="12"
-          sm="12"
+          sm="4"
           lg="4"
         >
           <ProjectCard :project="project" />

@@ -9,6 +9,13 @@
       class="mb-6"
       @click="toggleExpand"
     >
+      <img
+        v-if="project.image"
+        :src="project.image"
+        alt="Fondo proyecto"
+        class="bg-image"
+        draggable="false"
+      />
       <v-card-item class="card-content">
         <template #prepend>
           <v-avatar rounded="lg" size="100" class="mr-3 project-avatar">
@@ -25,22 +32,27 @@
         <v-card-title class="text-h5 font-weight-bold text-white">{{
           project.name
         }}</v-card-title>
-
-        <template #append>
-          <v-icon
-            size="large"
-            :color="isExpanded ? 'primary' : 'grey'"
-            :icon="isExpanded ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-            class="mr-2 transition-swing"
-          ></v-icon>
-        </template>
       </v-card-item>
 
-      <v-expand-transition>
-        <div v-if="isExpanded">
-          <v-divider class="mx-4 divider-light"></v-divider>
-
-          <v-card-text class="pt-4 card-content">
+      <v-dialog v-model="isDialogOpen" max-width="500">
+        <!-- El diálogo se abre al hacer click en la tarjeta (no hay botón activador aquí) -->
+        <v-card class="pa-3" style="background: #181a20; color: #fff">
+          <v-row class="dialog-logo-container mb-2" align="center" justify="center">
+            <v-col cols="12" class="d-flex flex-column align-center justify-center">
+              <v-avatar
+                v-if="project.logo"
+                size="60"
+                class="dialog-logo mb-2"
+              >
+                <v-img :src="project.logo" alt="Logo proyecto" cover></v-img>
+              </v-avatar>
+              <v-card-title class="text-h5 font-weight-bold mb-2 text-center">
+                {{ project.name }}
+              </v-card-title>
+            </v-col>
+          </v-row>
+          <v-divider class="divider-light mb-3"></v-divider>
+          <v-card-text>
             <v-sheet class="pa-4 mb-4 content-overlay rounded-lg">
               <p v-if="project.description" class="text-body-1 mb-4">
                 {{ project.description }}
@@ -64,16 +76,19 @@
 
               <v-row class="mt-4">
                 <v-col v-if="project.websiteUrl" cols="12" sm="auto">
-                  <v-btn
-                    color="primary"
-                    block
+                  <a
+                    v-if="project.websiteUrl"
                     :href="project.websiteUrl"
                     target="_blank"
-                    prepend-icon="mdi-web"
-                    variant="elevated"
+                    rel="noopener noreferrer"
+                    class="star-btn-gradient d-inline-flex align-center justify-center mt-2"
+                    style="text-decoration: none; min-width: 180px"
                   >
+                    <v-icon color="white" left class="star-icon"
+                      >mdi-web</v-icon
+                    >
                     Visitar sitio web
-                  </v-btn>
+                  </a>
                 </v-col>
                 <!-- <v-col cols="12" sm="auto" v-if="project.githubUrl">
                   <v-btn 
@@ -91,8 +106,8 @@
               </v-row>
             </v-sheet>
           </v-card-text>
-        </div>
-      </v-expand-transition>
+        </v-card>
+      </v-dialog>
     </v-card>
   </v-hover>
 </template>
@@ -107,6 +122,7 @@ export default {
       default: () => ({
         name: '',
         image: '',
+        logo: '',
         description: '',
         websiteUrl: '',
         githubUrl: '',
@@ -116,7 +132,7 @@ export default {
   },
   data() {
     return {
-      isExpanded: false,
+      isDialogOpen: false,
       colors: ['primary', 'secondary', 'info', 'success', 'warning', 'error'],
     }
   },
@@ -146,7 +162,7 @@ export default {
   },
   methods: {
     toggleExpand() {
-      this.isExpanded = !this.isExpanded
+      this.isDialogOpen = !this.isDialogOpen
     },
     getChipColor(index) {
       return this.colors[index % this.colors.length]
@@ -157,14 +173,44 @@ export default {
 
 <style scoped>
 .project-card {
-  transition: all 0.3s ease;
+  transition: all 0.35s cubic-bezier(0.4, 2, 0.3, 1);
   position: relative;
   overflow: hidden;
+  min-height: 300px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.16), 0 1.5px 7px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: scale(1.025) translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22), 0 3px 14px rgba(0, 0, 0, 0.16);
+}
+
+.project-card .bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  transition: transform 0.5s cubic-bezier(0.4, 2, 0.3, 1);
+}
+
+.project-card:hover .bg-image {
+  transform: scale(1.07);
 }
 
 .card-content {
   position: relative;
-  z-index: 200;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem 0.6rem 1.5rem;
 }
 
 .project-avatar {
@@ -173,7 +219,8 @@ export default {
 }
 
 .text-white {
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  color: #fff !important;
+  text-shadow: 1.5px 2px 8px rgba(0, 0, 0, 0.65), 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .divider-light {
@@ -215,12 +262,23 @@ export default {
   right: 0;
   bottom: 0;
   background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.7) 100%
+    120deg,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0.65) 60%,
+    rgba(0, 0, 0, 0.85) 100%
   );
   z-index: 1;
   pointer-events: none;
+  transition: background 0.4s cubic-bezier(0.4, 2, 0.3, 1);
+}
+
+.project-card:hover::after {
+  background: linear-gradient(
+    120deg,
+    rgba(0, 0, 0, 0.32) 0%,
+    rgba(0, 0, 0, 0.55) 60%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
 }
 
 @keyframes gradient-animation {
@@ -233,5 +291,48 @@ export default {
   100% {
     background-position: 0% 50%;
   }
+}
+/* Botón inspirado en el ejemplo proporcionado */
+.star-btn-gradient {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(
+    90deg,
+    rgb(56, 102, 255) 0%,
+    rgb(143, 220, 255) 100%
+  );
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2rem;
+  padding: 0.5rem 1.2rem;
+  font-weight: 500;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(161, 143, 255, 0.08);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+  outline: none;
+  position: relative;
+  z-index: 2;
+}
+.star-btn-gradient:hover {
+  box-shadow: 0 4px 18px rgba(255, 123, 123, 0.16),
+    0 2px 8px rgba(161, 143, 255, 0.16);
+  transform: scale(1.04);
+}
+.star-icon {
+  color: #ffb86c;
+  font-size: 1.25em;
+  margin-right: 0.5rem;
+}
+.dialog-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dialog-logo {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  padding: 3px;
 }
 </style>
