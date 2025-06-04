@@ -4,7 +4,7 @@
       <v-fade-transition mode="out-in">
         <div class="main-video" :key="selectedVideo.id">
           <iframe
-            :src="selectedVideo.url"
+            :src="embedUrl"
             frameborder="0"
             allowfullscreen
             class="responsive-iframe"
@@ -60,92 +60,91 @@ export default {
       videos: [
         {
           id: 1,
-          title: 'Webicultores - Plataforma de Branding',
-          url: 'https://www.youtube.com/embed/4WZg8v3v0nQ',
+          title: 'Logo Animación Intro - Arroz Frito Rest',
+          url: 'https://youtube.com/shorts/awBgPvo_YvI?feature=share&rel=0',
           description:
-            'Demo del proyecto Webicultores, una plataforma moderna para branding digital y gestión de portafolios.',
-          shortDesc: 'Branding y portafolio',
-          thumbnail: 'https://img.youtube.com/vi/4WZg8v3v0nQ/hqdefault.jpg',
-          category: 'Branding',
+            'Logo Animación Intro para el restaurante Arroz Frito Rest.',
+          shortDesc: 'Logo Animación Intro',
+          thumbnail: 'https://img.youtube.com/vi/awBgPvo_YvI/hqdefault.jpg',
+          category: 'Logo Animación',
         },
         {
           id: 2,
-          title: 'Sistema de Pedidos Online',
-          url: 'https://www.youtube.com/embed/3nQNiWdeH2Q',
+          title: 'Animación 2D - Elemento Aire',
+          url: 'https://www.youtube.com/watch?v=-pvxoxTGgRY',
           description:
-            'Presentación del sistema de pedidos online desarrollado para restaurantes y comercios.',
-          shortDesc: 'Pedidos',
-          thumbnail: 'https://img.youtube.com/vi/3nQNiWdeH2Q/hqdefault.jpg',
-          category: 'E-commerce',
+            'Animación 2D de un elemento de aire con efectos de movimiento y iluminación.',
+          shortDesc: 'Animación 2D',
+          thumbnail:
+            'https://i9.ytimg.com/vi/-pvxoxTGgRY/mqdefault.jpg?v=61ad3121&sqp=CLiN-cEG&rs=AOn4CLDroAV_OY_2Ns_B6RFJLN4a8jNbjQ',
+          category: 'Animación 2D',
         },
         {
           id: 3,
-          title: 'Landing Page - Delivery Express',
-          url: 'https://www.youtube.com/embed/2Vv-BfVoq4g',
+          title: 'Animación 2D - Elemento Agua',
+          url: 'https://www.youtube.com/watch?v=eOG7zGhfUOM',
           description:
-            'Ejemplo de landing page creada para el servicio Delivery Express.',
-          shortDesc: 'Landing Page',
-          thumbnail: 'https://img.youtube.com/vi/2Vv-BfVoq4g/hqdefault.jpg',
-          category: 'Marketing',
+            'Animación 2D de un elemento de agua con efectos de movimiento y iluminación.',
+          shortDesc: 'Animación 2D',
+          thumbnail: 'https://img.youtube.com/vi/eOG7zGhfUOM/hqdefault.jpg',
+          category: 'Animación 2D',
         },
         {
           id: 4,
-          title: 'Portafolio Personal Animado',
-          url: 'https://www.youtube.com/embed/ScMzIvxBSi4',
+          title: 'Animación 2D - Elemento Fuego',
+          url: 'https://www.youtube.com/watch?v=BhIB3obRA8Y',
           description:
-            'Portafolio personal interactivo con animaciones y presentación de proyectos.',
-          shortDesc: 'Portafolio Animado',
-          thumbnail: 'https://img.youtube.com/vi/ScMzIvxBSi4/hqdefault.jpg',
-          category: 'Diseño',
+            'Animación 2D de un elemento de fuego con efectos de movimiento y iluminación.',
+          shortDesc: 'Animación 2D',
+          thumbnail: 'https://img.youtube.com/vi/BhIB3obRA8Y/hqdefault.jpg',
+          category: 'Animación 2D',
         },
         {
           id: 5,
-          title: 'Video de Presentación de Empresa',
-          url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+          title: 'Animación 2D - Cartas',
+          url: 'https://www.youtube.com/watch?v=GQ15PRhhYZI',
           description:
-            'Video de presentación de empresa que muestra los servicios y productos ofrecidos.',
-          shortDesc: 'Presentación de Empresa',
-          thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
-          category: 'Publicidad',
+            'Animación 2D de cartas con efectos de movimiento y iluminación.',
+          shortDesc: 'Animación 2D',
+          thumbnail: 'https://img.youtube.com/vi/GQ15PRhhYZI/hqdefault.jpg',
+          category: 'Animación 2D',
         },
         {
           id: 6,
-          title: 'Tutoriales de Photoshop',
-          url: 'https://www.youtube.com/embed/Gs9jFR5lXZ8',
-          description:
-            'Serie de tutoriales de Photoshop para aprender técnicas básicas y avanzadas.',
-          shortDesc: 'Tutoriales de Photoshop',
-          thumbnail: 'https://img.youtube.com/vi/Gs9jFR5lXZ8/hqdefault.jpg',
-          category: 'Educación',
+          title: 'Video Clip - La Vaca Mariposa',
+          url: 'https://www.youtube.com/watch?v=99p136Oyrbs',
+          description: 'Video clip animado de la canción "La Vaca Mariposa".',
+          shortDesc: 'Video Clip',
+          thumbnail: 'https://img.youtube.com/vi/99p136Oyrbs/hqdefault.jpg',
+          category: 'IA',
         },
         {
           id: 7,
-          title: 'Análisis de Mercado',
-          url: 'https://www.youtube.com/embed/7UCvLzjGxNk',
+          title: 'Video Clip - El Loco Juan Carabina',
+          url: 'https://www.youtube.com/watch?v=WUPQ-S5FM50',
           description:
-            'Análisis de mercado para entender las tendencias y oportunidades de negocio.',
-          shortDesc: 'Análisis de Mercado',
-          thumbnail: 'https://img.youtube.com/vi/7UCvLzjGxNk/hqdefault.jpg',
-          category: 'Negocios',
+            'Video clip animado de la canción "El Loco Juan Carabina".',
+          shortDesc: 'Video Clip',
+          thumbnail: 'https://img.youtube.com/vi/WUPQ-S5FM50/hqdefault.jpg',
+          category: 'IA',
         },
         {
           id: 8,
-          title: 'Desarrollo de Aplicaciones Móviles',
-          url: 'https://www.youtube.com/embed/3r4yJ3N3jKQ',
-          description: 'Desarrollo de aplicaciones móviles para Android y iOS.',
-          shortDesc: 'Desarrollo de Aplicaciones Móviles',
-          thumbnail: 'https://img.youtube.com/vi/3r4yJ3N3jKQ/hqdefault.jpg',
-          category: 'Tecnología',
+          title: 'Animación y Mezcla - Taita Querubin',
+          url: 'https://www.youtube.com/watch?v=6CQyHIsPVhk',
+          description: 'Animación 2D de Taita Querubin.',
+          shortDesc: 'Animación 2D',
+          thumbnail: 'https://img.youtube.com/vi/6CQyHIsPVhk/hqdefault.jpg',
+          category: 'IA',
         },
         {
           id: 9,
-          title: 'Marketing Digital',
-          url: 'https://www.youtube.com/embed/9bZkp7q19f0',
-          description:
-            'Estrategias de marketing digital para aumentar la visibilidad y ventas en línea.',
-          shortDesc: 'Marketing Digital',
-          thumbnail: 'https://img.youtube.com/vi/9bZkp7q19f0/hqdefault.jpg',
-          category: 'Marketing',
+          title: 'IA - Shaman Journey',
+          url: 'https://www.youtube.com/watch?v=YNVpbm0Ljck',
+          description: 'Animación 2D de Shaman Journey.',
+          shortDesc: 'Animación 2D',
+          thumbnail: 'https://img.youtube.com/vi/YNVpbm0Ljck/hqdefault.jpg',
+          category: 'IA',
         },
         {
           id: 10,
@@ -195,6 +194,21 @@ export default {
       return this.videos.filter(
         (video) => video.category === this.selectedCategory
       )
+    },
+    embedUrl() {
+      const url = this.selectedVideo?.url || ''
+      // Shorts
+      const shortsMatch = url.match(/youtube\.com\/shorts\/([\w-]+)/)
+      if (shortsMatch) {
+        return `https://www.youtube.com/embed/${shortsMatch[1]}`
+      }
+      // watch?v=
+      const watchMatch = url.match(/[?&]v=([\w-]+)/)
+      if (watchMatch) {
+        return `https://www.youtube.com/embed/${watchMatch[1]}`
+      }
+      // Ya es embed o cualquier otro
+      return url
     },
   },
   methods: {
@@ -255,7 +269,7 @@ export default {
   }
 }
 .v-list-item.selected {
-  background: #f5f5f5 !important;
+  background: rgb(55, 66, 97) !important;
   border-left: 4px solid #1976d2;
 }
 @media (max-width: 960px) {

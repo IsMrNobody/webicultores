@@ -80,23 +80,22 @@ export default {
           ],
         },
         {
-          name: 'Davadiled',
+          name: 'Latam Turquesa',
           image:
-            'https://images.unsplash.com/photo-1513506003901-1e6a229e622d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748705558/latamturquesa/lat1_vwlbwj.png',
           backgroundImage:
-            'https://images.unsplash.com/photo-1526401485004-4690e0e21c97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748530206/latamturquesa/colorlatam_xbb88s.png',
           description:
-            'Tienda en línea especializada en iluminación LED para el hogar. Ofrece una amplia gama de productos de iluminación moderna, eficiente y de alta calidad con diseños exclusivos.',
-          websiteUrl: 'https://davadiled.netlify.app/',
+            'Sitio web corporativo para firma de consultoría especializada en conectar América Latina y Turquía. Incluye presentación de servicios B2B, turismo y consultoría con diseño elegante y funcional.',
+          websiteUrl: 'https://latamturquesa.com/',
           technologies: [
             'Vue.js',
             'Nuxt.js',
-            'E-commerce',
             'Responsive Design',
-            'Product Catalog',
+            'SEO',
+            'WhatsApp',
           ],
         },
-
         {
           name: 'Mila Café',
           image:
@@ -133,23 +132,7 @@ export default {
             'Menu Online',
           ],
         },
-        {
-          name: 'Latam Turquesa',
-          image:
-            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748705558/latamturquesa/lat1_vwlbwj.png',
-          backgroundImage:
-            'https://res.cloudinary.com/dku13l2ep/image/upload/v1748530206/latamturquesa/colorlatam_xbb88s.png',
-          description:
-            'Sitio web corporativo para firma de consultoría especializada en conectar América Latina y Turquía. Incluye presentación de servicios B2B, turismo y consultoría con diseño elegante y funcional.',
-          websiteUrl: 'https://latamturquesa.com/',
-          technologies: [
-            'Vue.js',
-            'Nuxt.js',
-            'Responsive Design',
-            'SEO',
-            'WhatsApp',
-          ],
-        },
+
         // {
         //   name: 'E-commerce Moderno',
         //   image:
