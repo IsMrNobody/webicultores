@@ -8,6 +8,7 @@
 import PortfolioGrid from '~/components/PortfolioGrid.vue'
 
 export default {
+  layout: 'project',
   name: 'PortfolioPage',
   components: {
     PortfolioGrid,

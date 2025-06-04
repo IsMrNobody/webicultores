@@ -1,385 +1,280 @@
+template
 <template>
-  <div
-    style="
-      width: 100vw;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    "
-  >
-    <canvas ref="threeCanvas" class="three-canvas"></canvas>
-    <transition name="fade">
-      <div v-if="showChip" class="chip-welcome">Bienvenido</div>
-    </transition>
+  <div style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0">
+    <LoadingSpinner v-if="loading" />
+    <div
+      ref="threeContainer"
+      style="width: 100vw; height: 100vh; position: fixed; top: 0; left: 0"
+    ></div>
+    <div
+      v-if="tooltip.visible"
+      :style="{
+        position: 'fixed',
+        left: tooltip.x + 'px',
+        top: tooltip.y + 'px',
+        background: 'rgba(30,30,30,0.95)',
+        color: '#fff',
+        padding: '8px 16px',
+        borderRadius: '8px',
+        pointerEvents: 'auto',
+        zIndex: 10000,
+        fontSize: '1.1em',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.2)',
+      }"
+    >
+      <TooltipMenu @navigate="handleTooltipNavigate" />
+    </div>
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+<script>
 import * as THREE from 'three'
 
-const showChip = ref(false)
-let chipTimeout = null
+import TooltipMenu from '~/components/TooltipMenu.vue'
+import LoadingSpinner from '~/components/LoadingSpinner.vue'
 
-// Import dinámico para GLTFLoader
-let GLTFLoader
-
-const threeCanvas = ref(null)
-let renderer, scene, camera, animationId, astronaut, mixer
-
-onMounted(async () => {
-  const width = window.innerWidth
-  const height = window.innerHeight
-
-  // Importa GLTFLoader dinámicamente
-  const module = await import('three/examples/jsm/loaders/GLTFLoader.js')
-  GLTFLoader = module.GLTFLoader
-
-  // Renderer
-  renderer = new THREE.WebGLRenderer({
-    canvas: threeCanvas.value,
-    alpha: true,
-    antialias: true,
-  })
-  renderer.setSize(width, height)
-  renderer.setClearColor(0x000000, 1)
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-  renderer.shadowMap.enabled = true
-
-  // Ajustar el canvas a pantalla completa
-  threeCanvas.value.style.position = 'fixed'
-  threeCanvas.value.style.top = '0'
-  threeCanvas.value.style.left = '0'
-  threeCanvas.value.style.width = '100vw'
-  threeCanvas.value.style.height = '100vh'
-  threeCanvas.value.style.zIndex = '999'
-
-  // Scene
-  scene = new THREE.Scene()
-  scene.background = new THREE.Color('black')
-
-  // Camera
-  camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
-  camera.position.set(0, 1.5, 7)
-  camera.lookAt(0, 1.5, 0)
-
-  // Luces
-  setupLights()
-
-  // Cargar modelo GLB
-  loadModel()
-
-  // Raycaster para clicks sobre el modelo
-  const raycaster = new THREE.Raycaster()
-  const mouse = new THREE.Vector2()
-
-  threeCanvas.value.addEventListener('click', (event) => {
-    if (!astronaut) return
-    // Normalizar coordenadas del mouse
-    const rect = threeCanvas.value.getBoundingClientRect()
-    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
-    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
-    raycaster.setFromCamera(mouse, camera)
-    // Intersectar con el modelo
-    const intersects = raycaster.intersectObject(astronaut, true)
-    if (intersects.length > 0) {
-      showChip.value = true
-      if (chipTimeout) clearTimeout(chipTimeout)
-      chipTimeout = setTimeout(() => {
-        showChip.value = false
-      }, 2500)
-    } else {
-      showChip.value = false
+export default {
+  name: 'ThreeDroneScene',
+  components: {
+    TooltipMenu,
+    LoadingSpinner,
+  },
+  data() {
+    return {
+      tooltip: {
+        visible: false,
+        x: 0,
+        y: 0,
+        timeout: null,
+      },
+      loading: true,
     }
-  })
-
-  // Interactividad hover, zoom y rotación con click
-  let isHovering = false
-  let isDragging = false
-  let lastMouseX = 0
-
-  // Animation loop
-  function animate() {
-    animationId = requestAnimationFrame(animate)
-    if (mixer) mixer.update(0.016) // ~60fps
-    if (astronaut) {
-      if (isHovering) {
-        // astronaut.rotation.y += 0.02 // rotación más rápida al hacer hover
-      }
-    }
-    renderer.render(scene, camera)
-  }
-  animate()
-
-  // Hover events
-  threeCanvas.value.addEventListener('mouseenter', () => {
-    isHovering = true
-  })
-  threeCanvas.value.addEventListener('mouseleave', () => {
-    isHovering = false
-  })
-
-  // Rotación o movimiento con click y arrastre
-  let lastMouseY = 0
-  threeCanvas.value.addEventListener('mousedown', (event) => {
-    isDragging = true
-    lastMouseX = event.clientX
-    lastMouseY = event.clientY
-  })
-  window.addEventListener('mouseup', () => {
-    isDragging = false
-  })
-  window.addEventListener('mousemove', (event) => {
-    if (!isDragging || !astronaut) return
-    const deltaX = event.clientX - lastMouseX
-    const deltaY = event.clientY - lastMouseY
-    if (event.shiftKey) {
-      // Mover posición X/Y
-      astronaut.position.x += deltaX * 0.01
-      astronaut.position.y -= deltaY * 0.01
-    } else {
-      // Rotar
-      astronaut.rotation.y += deltaX * 0.01 // sensibilidad
-    }
-    lastMouseX = event.clientX
-    lastMouseY = event.clientY
-  })
-
-  // Zoom con scroll
-  threeCanvas.value.addEventListener(
-    'wheel',
-    (event) => {
-      if (!astronaut) return
-      event.preventDefault()
-      const scaleStep = 0.1
-      let newScale =
-        astronaut.scale.x + (event.deltaY < 0 ? scaleStep : -scaleStep)
-      newScale = Math.max(0.5, Math.min(5, newScale)) // Limita el zoom
-      astronaut.scale.set(newScale, newScale, newScale)
+  },
+  methods: {
+    handleTooltipNavigate(path) {
+      this.tooltip.visible = false
+      this.$router.push(path)
     },
-    { passive: false }
-  )
+  },
+  async mounted() {
+    // Variables
+    this.scene = new THREE.Scene()
+    this.scene.background = null // Fondo transparente
 
-  // Responsive resize
-  const handleResize = () => {
-    const newWidth = threeCanvas.value.clientWidth || window.innerWidth
-    camera.aspect = newWidth / height
-    camera.updateProjectionMatrix()
-    renderer.setSize(newWidth, height)
-  }
-  window.addEventListener('resize', () => {
-    const width = window.innerWidth
-    const height = window.innerHeight
-    camera.aspect = width / height
-    camera.updateProjectionMatrix()
-    renderer.setSize(width, height)
-  })
+    this.camera = new THREE.PerspectiveCamera(
+      45,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      1000
+    )
+    this.camera.position.set(0, 2, 5)
 
-  onBeforeUnmount(() => {
-    cancelAnimationFrame(animationId)
-    renderer.dispose()
-    window.removeEventListener('resize', handleResize)
-    if (chipTimeout) clearTimeout(chipTimeout)
+    this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
+    this.renderer.setClearColor(0x000000, 0) // Transparente
+    this.renderer.setSize(window.innerWidth, window.innerHeight)
+    this.renderer.setPixelRatio(window.devicePixelRatio)
+    this.$refs.threeContainer.appendChild(this.renderer.domElement)
+    this.renderer.domElement.style.width = '100vw'
+    this.renderer.domElement.style.height = '100vh'
 
-    // Limpiar recursos
-    if (astronaut) {
-      scene.remove(astronaut)
-      disposeScene(astronaut)
-    }
-    disposeScene(scene)
-    if (mixer) {
-      mixer.stopAllAction()
-      mixer.uncacheRoot(astronaut)
-      mixer = null
-    }
-  })
-
-  function setupLights() {
-    // Luz ambiental suave
-    const ambientLight = new THREE.AmbientLight(0x404040, 0.5)
-    scene.add(ambientLight)
-
-    // Luz blanca intensa
-    const whiteLight = new THREE.PointLight(0xffffff, 2, 100)
-    whiteLight.position.set(0, 5, 5)
-    scene.add(whiteLight)
-
-    // Luz direccional principal
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
+    // Luces
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2)
+    this.scene.add(ambientLight)
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2)
     directionalLight.position.set(5, 10, 7.5)
-    directionalLight.castShadow = true
-    scene.add(directionalLight)
+    this.scene.add(directionalLight)
 
-    // Luz de relleno
-    const fillLight = new THREE.DirectionalLight(0x1e90ff, 0.5)
-    fillLight.position.set(-3, 3, 2)
-    scene.add(fillLight)
-  }
-
-  async function loadModel() {
-    try {
-      const loader = new GLTFLoader()
-
-      // Mostrar indicador de carga
-      console.log('Cargando modelo...')
-
-      const glb = await new Promise((resolve, reject) => {
-        loader.load(
-          '/drone.gltf',
-          (gltf) => resolve(gltf),
-          undefined,
-          (err) => reject(err)
-        )
-      })
-
-      if (!glb) {
-        throw new Error('No se pudo cargar el modelo')
-      }
-
-      astronaut = glb.scene
-
-      // Ajustar posición y escala
-      astronaut.position.set(0, 0, 0)
-      astronaut.scale.set(2.5, 2.5, 2.5)
-
-      // Aplicar material dorado
-      // const goldMaterial = new THREE.MeshStandardMaterial({
-      //   color: 0xffd700, // dorado
-      //   metalness: 1,
-      //   roughness: 0.2,
-      //   envMapIntensity: 1,
-      // })
-
-      astronaut.traverse((child) => {
-        if (child.isMesh) {
-          // child.material = goldMaterial
-          // Mejorar sombreado
-          child.castShadow = true
-          child.receiveShadow = true
-        }
-      })
-
-      scene.add(astronaut)
-      console.log('Modelo cargado correctamente:', astronaut)
-
-      // Animaciones GLTF
-      if (glb.animations && glb.animations.length > 0) {
-        mixer = new THREE.AnimationMixer(astronaut)
-        glb.animations.forEach((clip) => {
-          mixer.clipAction(clip).play()
-        })
-      }
-
-      // Ajustar cámara para encuadrar el modelo
-      const box = new THREE.Box3().setFromObject(astronaut)
+    // Cargar modelo GLTF dinámicamente
+    const { GLTFLoader } = await import(
+      'three/examples/jsm/loaders/GLTFLoader.js'
+    )
+    const loader = new GLTFLoader()
+    loader.load('/drone.gltf', (gltf) => {
+      this.loading = false
+      this.model = gltf.scene
+      // Centrar el modelo en el origen
+      const box = new THREE.Box3().setFromObject(this.model)
       const center = box.getCenter(new THREE.Vector3())
+      this.model.position.sub(center)
+      // Escalar el modelo para que sea más grande
       const size = box.getSize(new THREE.Vector3())
+      const maxDim = Math.max(size.x, size.y, size.z)
+      let scale = 2.5 / maxDim // Ajusta este valor para más o menos tamaño
+      // Ajuste responsivo para móvil
+      if (window.innerWidth < 600) {
+        scale = 1.4 / maxDim
+      }
+      this.model.scale.setScalar(scale)
+      // Opcional: ajustar la cámara para encuadrar mejor
+      this.camera.position.set(0, 0, 5)
+      this.camera.lookAt(0, 0, 0)
+      this.scene.add(this.model)
+      // Animación GLTF
+      if (gltf.animations && gltf.animations.length > 0) {
+        this.mixer = new THREE.AnimationMixer(this.model)
+        this.action = this.mixer.clipAction(gltf.animations[0])
+        this.action.paused = true
+        this.action.play()
+      }
+    })
 
-      camera.position.z = Math.max(size.x, size.y, size.z) * 2
-      camera.lookAt(center)
-    } catch (error) {
-      console.error('Error al cargar el modelo:', error)
-      // Mostrar un cubo de error si el modelo no se carga
-      showErrorCube()
+    // Animación
+    this.clock = new THREE.Clock()
+    this.isModelHovered = false
+    this.animate = () => {
+      requestAnimationFrame(this.animate)
+      // Actualiza animación solo si está en hover
+      if (this.mixer && this.isModelHovered) {
+        const delta = this.clock.getDelta()
+        this.mixer.update(delta)
+      } else if (this.clock) {
+        this.clock.getDelta() // Mantén el reloj actualizado
+      }
+      this.renderer.render(this.scene, this.camera)
     }
-  }
+    this.animate()
 
-  function showErrorCube() {
-    const geometry = new THREE.BoxGeometry(1, 1, 1)
-    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
-    const cube = new THREE.Mesh(geometry, material)
-    scene.add(cube)
-    console.warn('Mostrando cubo de error en lugar del modelo')
-  }
+    // Interacción con mouse y touch
+    this.isDragging = false
+    this.prevPointer = { x: 0, y: 0 }
+    this.rotation = { x: 0, y: 0 }
 
-  function disposeScene(object) {
-    if (!object) return
+    // Raycaster para detectar hover sobre el modelo
+    this.raycaster = new THREE.Raycaster()
+    this.pointer = new THREE.Vector2()
 
-    // Liberar geometrías
-    if (object.geometry) {
-      object.geometry.dispose()
-    }
-
-    // Liberar materiales
-    if (object.material) {
-      if (Array.isArray(object.material)) {
-        object.material.forEach((material) => material.dispose())
+    const getPointer = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY }
       } else {
-        object.material.dispose()
+        return { x: e.clientX, y: e.clientY }
       }
     }
 
-    // Liberar texturas
-    if (object.texture) {
-      object.texture.dispose()
-    }
-
-    // Recorrer hijos
-    if (object.children) {
-      while (object.children.length > 0) {
-        disposeScene(object.children[0])
-        object.remove(object.children[0])
+    const checkModelHover = (clientX, clientY) => {
+      // Normaliza coordenadas de pantalla a -1 a 1
+      this.pointer.x = (clientX / window.innerWidth) * 2 - 1
+      this.pointer.y = -(clientY / window.innerHeight) * 2 + 1
+      this.raycaster.setFromCamera(this.pointer, this.camera)
+      if (this.model) {
+        const intersects = this.raycaster.intersectObject(this.model, true)
+        this.isModelHovered = intersects.length > 0
+        // Si hay animación, pausa o reanuda
+        if (this.action) this.action.paused = !this.isModelHovered
       }
     }
-  }
-})
+
+    const onPointerDown = (e) => {
+      this.isDragging = true
+      const p = getPointer(e)
+      this.prevPointer = { x: p.x, y: p.y }
+    }
+    const onPointerUp = () => {
+      this.isDragging = false
+    }
+    const onPointerMove = (e) => {
+      if (!this.isDragging || !this.model) return
+      const p = getPointer(e)
+      const dx = (p.x - this.prevPointer.x) / window.innerWidth
+      const dy = (p.y - this.prevPointer.y) / window.innerHeight
+      this.rotation.y += dx * Math.PI * 2
+      this.rotation.x += dy * Math.PI * 2
+      // Limita la rotación en X para no voltear
+      this.rotation.x = Math.max(
+        -Math.PI / 2,
+        Math.min(Math.PI / 2, this.rotation.x)
+      )
+      this.model.rotation.y = this.rotation.y
+      this.model.rotation.x = this.rotation.x
+      this.prevPointer = { x: p.x, y: p.y }
+      // Detecta hover mientras se arrastra
+      checkModelHover(p.x, p.y)
+    }
+    // Detecta hover con mouse y touch
+    this.renderer.domElement.addEventListener('mousemove', (e) =>
+      checkModelHover(e.clientX, e.clientY)
+    )
+    this.renderer.domElement.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches.length > 0)
+        checkModelHover(e.touches[0].clientX, e.touches[0].clientY)
+    })
+    // Click sobre el modelo para mostrar tooltip
+    const onModelClick = (e) => {
+      let clientX, clientY
+      if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX
+        clientY = e.touches[0].clientY
+      } else {
+        clientX = e.clientX
+        clientY = e.clientY
+      }
+      // Raycast para verificar si se hizo click sobre el modelo
+      this.pointer.x = (clientX / window.innerWidth) * 2 - 1
+      this.pointer.y = -(clientY / window.innerHeight) * 2 + 1
+      this.raycaster.setFromCamera(this.pointer, this.camera)
+      if (this.model) {
+        const intersects = this.raycaster.intersectObject(this.model, true)
+        if (intersects.length > 0) {
+          // Muestra el tooltip
+          this.tooltip.visible = true
+          this.tooltip.x = clientX + 10
+          this.tooltip.y = clientY - 10
+          if (this.tooltip.timeout) clearTimeout(this.tooltip.timeout)
+          this.tooltip.timeout = setTimeout(() => {
+            this.tooltip.visible = false
+          }, 4500)
+        }
+      }
+    }
+    this.renderer.domElement.addEventListener('click', onModelClick)
+    this.renderer.domElement.addEventListener('touchend', onModelClick)
+
+    this.renderer.domElement.addEventListener('mousedown', onPointerDown)
+    this.renderer.domElement.addEventListener('touchstart', onPointerDown)
+    window.addEventListener('mousemove', onPointerMove)
+    window.addEventListener('touchmove', onPointerMove)
+    window.addEventListener('mouseup', onPointerUp)
+    window.addEventListener('touchend', onPointerUp)
+
+    // Limpieza de eventos en beforeDestroy
+    this._remove3dEvents = () => {
+      this.renderer.domElement.removeEventListener('mousedown', onPointerDown)
+      this.renderer.domElement.removeEventListener('touchstart', onPointerDown)
+      window.removeEventListener('mousemove', onPointerMove)
+      window.removeEventListener('touchmove', onPointerMove)
+      window.removeEventListener('mouseup', onPointerUp)
+      window.removeEventListener('touchend', onPointerUp)
+      this.renderer.domElement.removeEventListener('click', onModelClick)
+      this.renderer.domElement.removeEventListener('touchend', onModelClick)
+      if (this.tooltip.timeout) clearTimeout(this.tooltip.timeout)
+    }
+
+    // Responsive
+    this.onWindowResize = () => {
+      this.camera.aspect = window.innerWidth / window.innerHeight
+      this.camera.updateProjectionMatrix()
+      this.renderer.setSize(window.innerWidth, window.innerHeight)
+    }
+    window.addEventListener('resize', this.onWindowResize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onWindowResize)
+    if (this._remove3dEvents) this._remove3dEvents()
+    if (this.renderer) {
+      this.renderer.dispose()
+    }
+    if (this.scene) {
+      this.scene.clear()
+    }
+    if (this.$refs.threeContainer && this.renderer) {
+      this.$refs.threeContainer.removeChild(this.renderer.domElement)
+    }
+  },
+}
 </script>
 
 <style scoped>
-.three-canvas {
-  width: 100vw;
-  height: 100vh;
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  background: #000;
-}
-.banner-title {
-  position: absolute;
-  left: 32px;
-  top: 32px;
-  font-size: 2.2rem;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  z-index: 2;
-  font-family: 'Arial', sans-serif;
-}
-
-/* Ajustes responsivos */
-@media (max-width: 768px) {
-  .banner-title {
-    font-size: 1.8rem;
-    left: 16px;
-    top: 20px;
-  }
-}
-.chip-welcome {
-  position: fixed;
-  left: 50%;
-  top: 40px;
-  transform: translateX(-50%);
-  background: #222;
-  color: #fff;
-  padding: 10px 26px;
-  border-radius: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
-  font-size: 1.15rem;
-  font-weight: 600;
-  z-index: 2000;
-  opacity: 0.97;
-  pointer-events: none;
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+div[ref='threeContainer'] {
+  overflow: hidden;
 }
 </style>
