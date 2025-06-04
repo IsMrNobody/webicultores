@@ -2,7 +2,7 @@
   <v-row class="video-player" no-gutters>
     <v-col cols="12" md="8" class="main-video-col">
       <v-fade-transition mode="out-in">
-        <div class="main-video" :key="selectedVideo.id">
+        <div :key="selectedVideo.id" class="main-video">
           <iframe
             :src="embedUrl"
             frameborder="0"
@@ -179,9 +179,6 @@ export default {
       selectedVideo: {},
     }
   },
-  created() {
-    this.selectedVideo = this.videos[0]
-  },
   computed: {
     categoryOptions() {
       const categories = this.videos.map((v) => v.category).filter(Boolean)
@@ -210,6 +207,9 @@ export default {
       // Ya es embed o cualquier otro
       return url
     },
+  },
+  created() {
+    this.selectedVideo = this.videos[0]
   },
   methods: {
     selectVideo(video) {

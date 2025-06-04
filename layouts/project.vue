@@ -65,6 +65,65 @@
       </v-container>
     </v-main>
     <!-- Footer -->
+    <v-footer color="grey darken-4" dark padless>
+      <v-container>
+        <v-row class="py-6">
+          <!-- Navigation Headers -->
+          <v-col cols="12" class="text-center">
+            <div class="d-flex flex-wrap justify-center">
+              <v-btn
+                to="/portfolio"
+                text
+                class="mx-4 my-2 gradient-hover-btn"
+                active-class="gradient-active"
+              >
+                <span class="text-h6 font-weight-bold">Web</span>
+              </v-btn>
+              <v-btn
+                to="/branding"
+                text
+                class="mx-4 my-2 gradient-hover-btn"
+                active-class="gradient-active"
+              >
+                <span class="text-h6 font-weight-bold">Diseño</span>
+              </v-btn>
+              <v-btn
+                to="/video"
+                text
+                class="mx-4 my-2 gradient-hover-btn"
+                active-class="gradient-active"
+              >
+                <span class="text-h6 font-weight-bold">Video</span>
+              </v-btn>
+            </div>
+          </v-col>
+        </v-row>
+
+        <!-- Social Icons and Copyright -->
+        <v-divider dark class="my-2"></v-divider>
+        <v-row justify="center" no-gutters class="py-4">
+          <v-col cols="12" class="text-center">
+            <div class="mb-3">
+              <v-btn
+                v-for="(icon, i) in socialIcons"
+                :key="i"
+                :href="icon.link"
+                target="_blank"
+                rel="noopener noreferrer"
+                icon
+                class="mx-2"
+              >
+                <v-icon size="20">{{ icon.name }}</v-icon>
+              </v-btn>
+            </div>
+            <div class="text-caption">
+              &copy; {{ new Date().getFullYear() }} Webicultores. Todos los
+              derechos reservados.
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-footer>
   </v-app>
 </template>
 

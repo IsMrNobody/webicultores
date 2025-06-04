@@ -1,13 +1,27 @@
 <template>
-  <div class="banner-3d">
+  <div
+    style="
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    "
+  >
     <canvas ref="threeCanvas" class="three-canvas"></canvas>
-    <!-- <div class="banner-title">¡Bienvenido a Webicultores!</div> -->
+    <transition name="fade">
+      <div v-if="showChip" class="chip-welcome">Bienvenido</div>
+    </transition>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import * as THREE from 'three'
+
+const showChip = ref(false)
+let chipTimeout = null
 
 // Import dinámico para GLTFLoader
 let GLTFLoader
@@ -16,8 +30,8 @@ const threeCanvas = ref(null)
 let renderer, scene, camera, animationId, astronaut, mixer
 
 onMounted(async () => {
-  const width = threeCanvas.value.clientWidth || window.innerWidth
-  const height = 350
+  const width = window.innerWidth
+  const height = window.innerHeight
 
   // Importa GLTFLoader dinámicamente
   const module = await import('three/examples/jsm/loaders/GLTFLoader.js')
@@ -34,6 +48,14 @@ onMounted(async () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   renderer.shadowMap.enabled = true
 
+  // Ajustar el canvas a pantalla completa
+  threeCanvas.value.style.position = 'fixed'
+  threeCanvas.value.style.top = '0'
+  threeCanvas.value.style.left = '0'
+  threeCanvas.value.style.width = '100vw'
+  threeCanvas.value.style.height = '100vh'
+  threeCanvas.value.style.zIndex = '999'
+
   // Scene
   scene = new THREE.Scene()
   scene.background = new THREE.Color('black')
@@ -41,12 +63,37 @@ onMounted(async () => {
   // Camera
   camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
   camera.position.set(0, 1.5, 7)
+  camera.lookAt(0, 1.5, 0)
 
   // Luces
   setupLights()
 
   // Cargar modelo GLB
   loadModel()
+
+  // Raycaster para clicks sobre el modelo
+  const raycaster = new THREE.Raycaster()
+  const mouse = new THREE.Vector2()
+
+  threeCanvas.value.addEventListener('click', (event) => {
+    if (!astronaut) return
+    // Normalizar coordenadas del mouse
+    const rect = threeCanvas.value.getBoundingClientRect()
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+    raycaster.setFromCamera(mouse, camera)
+    // Intersectar con el modelo
+    const intersects = raycaster.intersectObject(astronaut, true)
+    if (intersects.length > 0) {
+      showChip.value = true
+      if (chipTimeout) clearTimeout(chipTimeout)
+      chipTimeout = setTimeout(() => {
+        showChip.value = false
+      }, 2500)
+    } else {
+      showChip.value = false
+    }
+  })
 
   // Interactividad hover, zoom y rotación con click
   let isHovering = false
@@ -122,12 +169,19 @@ onMounted(async () => {
     camera.updateProjectionMatrix()
     renderer.setSize(newWidth, height)
   }
-  window.addEventListener('resize', handleResize)
+  window.addEventListener('resize', () => {
+    const width = window.innerWidth
+    const height = window.innerHeight
+    camera.aspect = width / height
+    camera.updateProjectionMatrix()
+    renderer.setSize(width, height)
+  })
 
   onBeforeUnmount(() => {
     cancelAnimationFrame(animationId)
     renderer.dispose()
     window.removeEventListener('resize', handleResize)
+    if (chipTimeout) clearTimeout(chipTimeout)
 
     // Limpiar recursos
     if (astronaut) {
@@ -274,20 +328,15 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.banner-3d {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background: #000;
-  overflow: hidden;
-  border-radius: 20px;
-  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.12);
-  margin-bottom: 36px;
-}
 .three-canvas {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: #000;
 }
 .banner-title {
   position: absolute;
@@ -308,5 +357,29 @@ onMounted(async () => {
     left: 16px;
     top: 20px;
   }
+}
+.chip-welcome {
+  position: fixed;
+  left: 50%;
+  top: 40px;
+  transform: translateX(-50%);
+  background: #222;
+  color: #fff;
+  padding: 10px 26px;
+  border-radius: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  font-size: 1.15rem;
+  font-weight: 600;
+  z-index: 2000;
+  opacity: 0.97;
+  pointer-events: none;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

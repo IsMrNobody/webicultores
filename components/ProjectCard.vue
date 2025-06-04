@@ -37,13 +37,16 @@
       <v-dialog v-model="isDialogOpen" max-width="500">
         <!-- El diálogo se abre al hacer click en la tarjeta (no hay botón activador aquí) -->
         <v-card class="pa-3" style="background: #181a20; color: #fff">
-          <v-row class="dialog-logo-container mb-2" align="center" justify="center">
-            <v-col cols="12" class="d-flex flex-column align-center justify-center">
-              <v-avatar
-                v-if="project.logo"
-                size="60"
-                class="dialog-logo mb-2"
-              >
+          <v-row
+            class="dialog-logo-container mb-2"
+            align="center"
+            justify="center"
+          >
+            <v-col
+              cols="12"
+              class="d-flex flex-column align-center justify-center"
+            >
+              <v-avatar v-if="project.logo" size="60" class="dialog-logo mb-2">
                 <v-img :src="project.logo" alt="Logo proyecto" cover></v-img>
               </v-avatar>
               <v-card-title class="text-h5 font-weight-bold mb-2 text-center">
