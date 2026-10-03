@@ -8,11 +8,11 @@
 import BrandingGrid from '~/components/BrandingGrid.vue'
 
 export default {
-  layout: 'project',
   name: 'BrandingPage',
   components: {
     BrandingGrid,
   },
+  layout: 'project',
   data() {
     return {
       brandingProjects: [

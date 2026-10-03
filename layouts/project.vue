@@ -80,6 +80,14 @@
                 <span class="text-h6 font-weight-bold">Web</span>
               </v-btn>
               <v-btn
+                to="/restaurantes"
+                text
+                class="mx-4 my-2 gradient-hover-btn"
+                active-class="gradient-active"
+              >
+                <span class="text-h6 font-weight-bold">Restaurantes</span>
+              </v-btn>
+              <v-btn
                 to="/branding"
                 text
                 class="mx-4 my-2 gradient-hover-btn"
@@ -140,6 +148,11 @@ export default {
           icon: 'mdi-code-tags',
           title: 'Desarrollo Web',
           to: '/portfolio',
+        },
+        {
+          icon: 'mdi-silverware-fork-knife',
+          title: 'Restaurantes',
+          to: '/restaurantes',
         },
         {
           icon: 'mdi-palette',

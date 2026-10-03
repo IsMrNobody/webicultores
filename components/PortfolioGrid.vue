@@ -31,6 +31,48 @@
       </div>
     </v-parallax>
 
+    <!-- Special Restaurants Callout Banner -->
+    <v-card
+      dark
+      class="mb-8 pa-4 pa-md-6 rounded-xl special-restaurant-banner"
+      elevation="4"
+    >
+      <v-row align="center">
+        <v-col cols="12" md="8">
+          <div class="d-flex align-center mb-2">
+            <v-chip small color="amber darken-2" class="font-weight-bold mr-2">
+              <v-icon left x-small>mdi-fire</v-icon>
+              Especialidad Gastronómica
+            </v-chip>
+            <span class="text-caption text-grey"
+              >5 Restaurantes en Producción</span
+            >
+          </div>
+          <h2 class="text-h5 font-weight-bold white--text mb-1">
+            Menús Digitales y Soluciones para Restaurantes
+          </h2>
+          <p class="text-body-2 text-grey lighten-1 mb-0">
+            Conoce cómo Mantel Rojo, Saporito, D'Oro, 11:11 Foodie Bar y Garage
+            Chilling digitalizaron sus cartas con pedidos directos a WhatsApp y
+            sin comisiones.
+          </p>
+        </v-col>
+        <v-col cols="12" md="4" class="text-md-right">
+          <v-btn
+            color="amber darken-2"
+            dark
+            large
+            depressed
+            to="/restaurantes"
+            class="font-weight-bold"
+          >
+            <v-icon left>mdi-silverware-fork-knife</v-icon>
+            Ver Portafolio Restaurantes
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-card>
+
     <!-- Filter and sort controls -->
     <!-- <v-card flat class="mb-8 pa-4 rounded-xl bg-surface-variant">
       <v-row align="center">
@@ -218,5 +260,11 @@ export default {
 .v-col:hover,
 .v-list-item:hover {
   z-index: 1;
+}
+
+.special-restaurant-banner {
+  background: linear-gradient(135deg, #181922 0%, #201e18 100%);
+  border: 1px solid rgba(255, 179, 0, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 </style>

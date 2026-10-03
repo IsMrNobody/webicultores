@@ -4,6 +4,7 @@
     <div class="question">¿Hacia dónde quieres navegar?</div>
     <div class="options">
       <button @click="$emit('navigate', '/portfolio')">web</button>
+      <button @click="$emit('navigate', '/restaurantes')">restaurantes</button>
       <button @click="$emit('navigate', '/branding')">design</button>
       <button @click="$emit('navigate', '/video')">video</button>
     </div>

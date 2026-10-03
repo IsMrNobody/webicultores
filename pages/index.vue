@@ -50,12 +50,6 @@ export default {
       loading: true,
     }
   },
-  methods: {
-    handleTooltipNavigate(path) {
-      this.tooltip.visible = false
-      this.$router.push(path)
-    },
-  },
   async mounted() {
     // Variables
     this.scene = new THREE.Scene()
@@ -269,6 +263,12 @@ export default {
     if (this.$refs.threeContainer && this.renderer) {
       this.$refs.threeContainer.removeChild(this.renderer.domElement)
     }
+  },
+  methods: {
+    handleTooltipNavigate(path) {
+      this.tooltip.visible = false
+      this.$router.push(path)
+    },
   },
 }
 </script>

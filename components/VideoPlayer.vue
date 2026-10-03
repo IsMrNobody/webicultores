@@ -150,8 +150,7 @@ export default {
           id: 10,
           title: 'Overlays Twitch',
           url: 'https://www.youtube.com/watch?v=MI7KzuFsxO8',
-          description:
-            'Diseño y Animación 2D para overlays de twitch.',
+          description: 'Diseño y Animación 2D para overlays de twitch.',
           shortDesc: 'Diseño de Interiores',
           thumbnail: 'https://img.youtube.com/vi/MI7KzuFsxO8/hqdefault.jpg',
           category: 'Overlays',
@@ -160,8 +159,7 @@ export default {
           id: 11,
           title: 'Cardelo Explosión 2D Animación',
           url: 'https://www.youtube.com/shorts/ge7Gbz6DxpQ',
-          description:
-            'Animacion 2D de un caldero de brujas.',
+          description: 'Animacion 2D de un caldero de brujas.',
           shortDesc: 'Branding y portafolio',
           thumbnail: 'https://img.youtube.com/vi/ge7Gbz6DxpQ/hqdefault.jpg',
           category: '2D',
@@ -170,8 +168,7 @@ export default {
           id: 4,
           title: 'App web - Arabe Food',
           url: 'https://www.youtube.com/watch?v=hOJctZEjyCI',
-          description:
-            'Pagin web para restaurante de comida Arabe.',
+          description: 'Pagin web para restaurante de comida Arabe.',
           shortDesc: 'Portafolio Animado',
           thumbnail: 'https://img.youtube.com/vi/hOJctZEjyCI/hqdefault.jpg',
           category: 'web',

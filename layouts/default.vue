@@ -83,6 +83,11 @@ export default {
           to: '/portfolio',
         },
         {
+          icon: 'mdi-silverware-fork-knife',
+          title: 'Restaurantes',
+          to: '/restaurantes',
+        },
+        {
           icon: 'mdi-palette',
           title: 'Diseño de Marca',
           to: '/branding',

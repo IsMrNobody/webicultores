@@ -8,14 +8,96 @@
 import PortfolioGrid from '~/components/PortfolioGrid.vue'
 
 export default {
-  layout: 'project',
   name: 'PortfolioPage',
   components: {
     PortfolioGrid,
   },
+  layout: 'project',
   data() {
     return {
       projects: [
+        {
+          name: 'Mantel Rojo: Parrillas & Más',
+          image: '/images/restaurants/mantel_rojo_grill_1791063663812.jpg',
+          backgroundImage:
+            '/images/restaurants/mantel_rojo_grill_1791063663812.jpg',
+          description:
+            'Menú digital interactivo y asistente virtual para restaurante de carnes y parrillas. Incluye carrusel de llamas, selector de término de cocción y envío directo a WhatsApp.',
+          websiteUrl: 'https://mantelrojo.netlify.app/',
+          technologies: [
+            'Vue.js',
+            'Tailwind CSS',
+            'Restaurantes',
+            'WhatsApp Direct',
+            'Responsive Design',
+          ],
+        },
+        {
+          name: 'Saporito — Pastas y Mariscos',
+          image: '/images/restaurants/saporito_pasta_seafood_1791063673167.jpg',
+          backgroundImage:
+            '/images/restaurants/saporito_pasta_seafood_1791063673167.jpg',
+          description:
+            'Carta digital de inspiración bohemia italiana con frutos del mar frescos, pastichos tradicionales y pedidos directos a WhatsApp para entrega a domicilio.',
+          websiteUrl: 'https://saporito.netlify.app/',
+          technologies: [
+            'React',
+            'Vite',
+            'Restaurantes',
+            'Italian Food',
+            'WhatsApp Direct',
+          ],
+        },
+        {
+          name: "D'Oro Restaurant",
+          image: '/images/restaurants/doro_artisan_pizza_1791063682637.jpg',
+          backgroundImage:
+            '/images/restaurants/doro_artisan_pizza_1791063682637.jpg',
+          description:
+            'Sitio web interactivo para restaurante especializado en pizzas cuadradas artesanales de 33x33cm, smash burgers y auténtico sabor maracucho en Puerto Ordaz.',
+          websiteUrl: 'https://dororest.netlify.app/',
+          technologies: [
+            'Vue.js',
+            'Restaurantes',
+            'Cabinet Grotesk',
+            'Pizzas',
+            'Street Food',
+          ],
+        },
+        {
+          name: '11:11 Foodie Bar',
+          image:
+            '/images/restaurants/restaurant_hero_culinary_1791063653662.jpg',
+          backgroundImage:
+            '/images/restaurants/restaurant_hero_culinary_1791063653662.jpg',
+          description:
+            'Menú interactivo para gastrobar de autor en Lechería. Carta dinámica de brunch, platos de autor para la cena, coctelería experimental y reservas.',
+          websiteUrl: 'https://11foodiebar11.netlify.app/',
+          technologies: [
+            'React',
+            'Tailwind CSS',
+            'Restaurantes',
+            'Gastrobar',
+            'Coctelería',
+          ],
+        },
+        {
+          name: 'Garage Chilling',
+          image:
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1777319241/garage/bg_mltzlk.png',
+          backgroundImage:
+            'https://res.cloudinary.com/dku13l2ep/image/upload/v1777319241/garage/bg_mltzlk.png',
+          description:
+            'Menú interactivo para comida rápida premium y hamburguesas. Estética de garaje urbano, personalización de salsas y checkout directo vía WhatsApp.',
+          websiteUrl: 'https://garagechilling.netlify.app/',
+          technologies: [
+            'React',
+            'Cloudinary',
+            'Restaurantes',
+            'Smash Burgers',
+            'Delivery',
+          ],
+        },
         {
           name: 'Orion Gallery',
           image:
