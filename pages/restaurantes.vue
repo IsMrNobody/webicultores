@@ -66,7 +66,7 @@
             <!-- Key Metrics Bar -->
             <v-row class="metrics-row justify-center mt-6">
               <v-col cols="6" sm="3" class="metric-item py-4">
-                <div class="metric-number text-amber">5+</div>
+                <div class="metric-number text-amber">11+</div>
                 <div class="metric-label">Restaurantes Activos</div>
               </v-col>
               <v-col cols="6" sm="3" class="metric-item py-4">
@@ -511,8 +511,7 @@
                       class="px-8 font-weight-bold"
                       :disabled="!formValid"
                     >
-                      <v-icon left>mdi-send</v-icon>
-                      Enviar Solicitud por WhatsApp
+                      Enviar
                     </v-btn>
                     <div class="text-caption text-grey mt-3">
                       Respuesta directa con el equipo técnico de Webicultores
@@ -785,6 +784,8 @@ export default {
         'Pizzas & Street Food',
         'Gastrobar & Coctelería',
         'Burgers & Casual',
+        'Cafetería & Panadería',
+        'Asiática & Wok',
       ],
 
       // Dialog states
@@ -956,6 +957,136 @@ export default {
           ],
           technologies: ['React', 'Cloudinary Video', 'Vite', 'Tailwind CSS'],
         },
+        {
+          id: 'mola-restaurant',
+          name: 'Mola Restaurant',
+          slogan: 'Gastrobar, Tapas & Coctelería Mediterránea',
+          category: 'Gastrobar & Coctelería',
+          location: 'Lechería / Anzoátegui',
+          websiteUrl: 'https://molarest.netlify.app/menu',
+          image: '/images/restaurants/mola_tapas_gastrobar_1791163566120.jpg',
+          shortDescription:
+            'Experiencia gastronómica moderna con carta digital de tapas de autor, cocina mediterránea, vinos y coctelería.',
+          story:
+            'Mola Restaurant requería una carta digital sofisticada con categorías fluidas que permitiese a sus comensales consultar tapas, entradas, platos principales y cocteles desde su smartphone con máxima velocidad.',
+          features: [
+            'Menú interactivo categorizado por tapas, platos y coctelería',
+            'Diseño estético mediterráneo con contrastes cálidos',
+            'Optimización total para visualización rápida mediante QR',
+            'Acceso directo a pedidos y reservas',
+          ],
+          technologies: ['Vue.js', 'Vuetify', 'Netlify Edge', 'Responsive UI'],
+        },
+        {
+          id: 'rey-cochino',
+          name: 'Rey Cochino',
+          slogan: 'Comida Rápida, Chino Frito & Auténtico Sabor Venezolano',
+          category: 'Pizzas & Street Food',
+          location: 'Anzoátegui',
+          websiteUrl: 'https://rey-cochino.netlify.app/',
+          image: '/images/restaurants/rey_cochino_frito_1791163576435.jpg',
+          shortDescription:
+            'El rey del cochino frito, chicharrón crujiente, arroz chino especial y combos de comida rápida venezolana.',
+          story:
+            'Rey Cochino requería un menú dinámico de alta conversión para delivery que facilitara a los clientes armar sus combos de cochino frito con tostones, ensaladas y arroz especial sin demoras.',
+          features: [
+            'Catálogo visual de raciones de cochino frito y combos familiares',
+            'Selector de acompañantes, salsas y extras',
+            'Botón de pedido directo a WhatsApp con comanda clara',
+            'Carga ultrarrápida adaptada a conexiones móviles',
+          ],
+          technologies: [
+            'Vue.js',
+            'Tailwind CSS',
+            'WhatsApp Ordering',
+            'Netlify',
+          ],
+        },
+        {
+          id: 'mc-racuchos',
+          name: 'Mc Racuchos',
+          slogan: 'Comida Rápida Maracucha & Street Food Zuliano',
+          category: 'Burgers & Casual',
+          location: 'Venezuela',
+          websiteUrl: 'https://mc-racuchos.netlify.app/',
+          image: '/images/restaurants/mc_racuchos_food_1791163588956.jpg',
+          shortDescription:
+            'Patacones gigantes, hamburguesas monumentales, pepitos, tumbarranchos y las mejores salsas zulianas a domicilio.',
+          story:
+            'Mc Racuchos llevó la auténtica sazón maracucha al entorno digital con un menú visualmente apetitoso y enfocado en maximizar los pedidos directos por delivery a WhatsApp.',
+          features: [
+            'Personalización completa de patacones (plátano verde o maduro)',
+            'Módulo de combos de comida rápida maracucha y tequeños',
+            'Cálculo de cuenta y envío de comanda con un solo tap',
+            'Diseño vibrante urbano con alta tasa de conversión',
+          ],
+          technologies: ['React', 'Vite', 'Tailwind CSS', 'WhatsApp Business'],
+        },
+        {
+          id: 'mila-cafe',
+          name: 'Mila Café',
+          slogan: 'Cafetería de Especialidad, Brunch & Repostería de Autor',
+          category: 'Cafetería & Panadería',
+          location: 'Lechería / Anzoátegui',
+          websiteUrl: 'https://milacafe.netlify.app/',
+          image: '/images/restaurants/mila_cafe_brunch_1791163607522.jpg',
+          shortDescription:
+            'El punto de encuentro para amantes del café de especialidad, desayunos gourmet, brunchs y pastelería fina.',
+          story:
+            'Mila Café buscaba reflejar su ambiente cálido y minimalista en una carta digital limpia, facilitando a los clientes explorar las notas de café, la bollería recién horneada y los platos salados.',
+          features: [
+            'Carta digital de bebidas frías, calientes y café de especialidad',
+            'Sección de brunch, tostadas gourmet y repostería artesanal',
+            'Diseño estético y delicado en tonos neutros y pastel',
+            'Escaneo rápido en mesa mediante código QR en acrílico',
+          ],
+          technologies: ['Vue.js', 'Vuetify', 'Netlify Edge', 'Mobile First'],
+        },
+        {
+          id: 'pan-arte',
+          name: 'PanArte',
+          slogan: 'Panadería Artesanal, Pastelería & Desayunos',
+          category: 'Cafetería & Panadería',
+          location: 'Venezuela',
+          websiteUrl: 'https://pan-arte.netlify.app/',
+          image: '/images/restaurants/pan_arte_panaderia_1791163618975.jpg',
+          shortDescription:
+            'Panes de masa madre, hojaldres crujientes, cachitos tradicionales, pastelería y desayunos recién salidos del horno.',
+          story:
+            'PanArte combinó la tradición panadera europea con el calor venezolano en un menú digital interactivo para encargos anticipados de panes, bandejas de pasapalos y desayunos diarios.',
+          features: [
+            'Catálogo de panes de corteza, hojaldres y bollería artesanal',
+            'Sección de desayunos, jugos naturales y combos matutinos',
+            'Pedidos rápidos para retiro en tienda (pick-up) o delivery',
+            'Fotografía culinaria apetecible y estructura intuitiva',
+          ],
+          technologies: ['Vue.js', 'Tailwind CSS', 'WhatsApp API', 'Netlify'],
+        },
+        {
+          id: 'arroz-frito-anaco',
+          name: 'Arroz Frito Anaco',
+          slogan: 'El Auténtico Arroz Frito y Gastronomía Asiática en Anaco',
+          category: 'Asiática & Wok',
+          location: 'Anaco / Anzoátegui',
+          websiteUrl: 'https://arrozfritoanaco.netlify.app/',
+          image: '/images/restaurants/arroz_frito_wok_1791163631889.jpg',
+          shortDescription:
+            'Especialistas en arroz chino frito al wok, lumpias crujientes, pollo agridulce y combos de comida cantonesa.',
+          story:
+            'Arroz Frito Anaco digitalizó su servicio de despacho y pedidos para la ciudad de Anaco, eliminando errores en comandas telefónicas mediante un sistema interactivo de selección de raciones.',
+          features: [
+            'Selector de porciones individuales, medianas y familiares de arroz frito',
+            'Adición de extras: lumpias, costillitas sal y pimienta y salsas',
+            'Direccionamiento automático de pedidos con datos de entrega',
+            'Funcionamiento ágil incluso en zonas con conexión móvil limitada',
+          ],
+          technologies: [
+            'Vue.js',
+            'Vuetify',
+            'WhatsApp Orders',
+            'Netlify Edge',
+          ],
+        },
       ],
     }
   },
@@ -967,7 +1098,7 @@ export default {
           hid: 'description',
           name: 'description',
           content:
-            "Portafolio especializado en desarrollo de menús digitales y aplicaciones gastronómicas para restaurantes. Diseños para Mantel Rojo, Saporito, D'Oro, 11:11 Foodie Bar y Garage Chilling.",
+            "Portafolio especializado en desarrollo de menús digitales y aplicaciones gastronómicas para restaurantes. Diseños para Mantel Rojo, Saporito, D'Oro, 11:11 Foodie Bar, Garage Chilling, Mola, Rey Cochino, Mc Racuchos, Mila Café, PanArte y Arroz Frito Anaco.",
         },
         {
           property: 'og:title',

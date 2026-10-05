@@ -52,9 +52,9 @@
             Menús Digitales y Soluciones para Restaurantes
           </h2>
           <p class="text-body-2 text-grey lighten-1 mb-0">
-            Conoce cómo Mantel Rojo, Saporito, D'Oro, 11:11 Foodie Bar y Garage
-            Chilling digitalizaron sus cartas con pedidos directos a WhatsApp y
-            sin comisiones.
+            Conoce cómo Mantel Rojo, Saporito, Mola, Rey Cochino, Mc Racuchos,
+            Mila Café, PanArte, D'Oro y más de 11 restaurantes digitalizaron sus
+            cartas con pedidos directos a WhatsApp y sin comisiones.
           </p>
         </v-col>
         <v-col cols="12" md="4" class="text-md-right">
@@ -67,7 +67,7 @@
             class="font-weight-bold"
           >
             <v-icon left>mdi-silverware-fork-knife</v-icon>
-            Ver Portafolio Restaurantes
+            Ver todos
           </v-btn>
         </v-col>
       </v-row>

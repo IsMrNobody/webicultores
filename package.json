@@ -15,6 +15,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.25.3",
+    "gsap": "^3.15.0",
     "nuxt": "^2.15.8",
     "three": "^0.177.0",
     "vue": "^2.7.10",
